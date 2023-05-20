@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -18,14 +16,13 @@ import javax.swing.text.MaskFormatter;
 
 import controller.AlunoController;
 
-public class PanelCadastroAluno extends JFrame {
+public class PanelCadastroAluno extends JPanel {
     private JTextField nome;
     private JTextField email;
     private JTextField cpf;
     private JTextField num_matricula;
     private JFormattedTextField telefone;
     private JComboBox<String> sexo;
-
     private JLabel labelNome;
     private JLabel labelCpf;
     private JLabel labelNum_Matricula;
@@ -33,52 +30,29 @@ public class PanelCadastroAluno extends JFrame {
     private JLabel labelSexo;
     private JLabel labelEmail;
     private JLabel labelTitulo;
-    private JLabel labelImg;
-
     private JButton botaoCadastrar;
 
     public PanelCadastroAluno() {
+        super();
+        this.setLayout(null); 
 
-        JFrame frame = new JFrame("Cadastro do Aluno");
-        JPanel painel = new JPanel();
-
-        painel.add(getLabelTitulo());
-        painel.add(getLabelNome());
-        painel.add(getNome());
-        painel.add(getLabelEmail());
-        painel.add(getEmail());
-        painel.add(getLabelCpf());
-        painel.add(getCpf());
-        painel.add(getLabelNum_Matricula());
-        painel.add(getNum_matricula());
-        painel.add(getLabelTelefone());
-        painel.add(getTelefone());
-        painel.add(getLabelSexo());
-        painel.add(getSexo());
-        painel.add(getBotaoCadastrar());
-       // painel.add(getLabelImg());
-
-        // Definições da tela
-        painel.setLayout(null);
-        frame.getContentPane().add(painel);
-        frame.setSize(700, 500);
-        setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
+        add(getLabelTitulo());
+        add(getLabelNome());
+        add(getNome());
+        add(getLabelEmail());
+        add(getEmail());
+        add(getLabelCpf());
+        add(getCpf());
+        add(getLabelNum_Matricula());
+        add(getNum_matricula());
+        add(getLabelTelefone());
+        add(getTelefone());
+        add(getLabelSexo());
+        add(getSexo());
+        add(getBotaoCadastrar());
+       
     }
-/* 
-    public JLabel getLabelImg() {
 
-        if (labelImg == null) {
-            labelImg = new JLabel();
-            labelImg.setIcon(new ImageIcon(PanelCadastroAluno.class.getResource("/img/fundo.jpg")));
-            labelImg.setBounds(0, 0, 684, 461);
-        }
-
-        return labelImg;
-    }
-*/
     public JLabel getLabelTitulo() {
         if (labelTitulo == null) {
             labelTitulo = new JLabel("Seja bem-vindo(a)!");
