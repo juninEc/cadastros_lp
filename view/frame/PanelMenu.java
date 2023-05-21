@@ -1,31 +1,40 @@
 package frame;
 
 import java.awt.Color;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import controller.FrameController;
 
 public class PanelMenu extends JPanel {
-    FrameController frame; 
+
+    static PanelMenu pMenu;
+    static PanelCadastroAluno pAluno;
+    static FrameTela frame;
     private JLabel labelTitulo;
     private JButton buttonAluno;
     private JButton buttonProfessor;
     private JButton buttonDisciplina;
+    boolean fechou;
 
     public PanelMenu() {
         super();
         this.setLayout(null);
+        setBackground(Color.decode("#B74B4B"));
+
+        pMenu = this;
 
         add(getLabelTitulo());
         add(getButtonAluno());
         add(getButtonProfessor());
         add(getButtonDisciplina());
+
+        ControladorFrame controlador = new ControladorFrame();
+        getButtonAluno().addActionListener(controlador);
+        getButtonProfessor().addActionListener(controlador);
+        getButtonDisciplina().addActionListener(controlador);
 
     }
 
@@ -42,6 +51,7 @@ public class PanelMenu extends JPanel {
         if (buttonAluno == null) {
             buttonAluno = new JButton("Cadastrar Aluno");
             buttonAluno.setBounds(380, 100, 220, 40);
+
         }
         return buttonAluno;
     }
@@ -63,4 +73,16 @@ public class PanelMenu extends JPanel {
         return buttonDisciplina;
     }
 
+    static class ControladorFrame implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == pMenu.getButtonAluno()) {
+                JOptionPane.showMessageDialog(null, "Cadastrar Disciplina");
+            } else if (e.getSource() == pMenu.getButtonProfessor()) {
+                JOptionPane.showMessageDialog(null, "Cadastrar Professor");
+            } else if (e.getSource() == pMenu.getButtonDisciplina()) {
+                JOptionPane.showMessageDialog(null, "Cadastrar Disciplina");
+            }
+        }
+    }
 }

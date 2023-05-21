@@ -23,5 +23,4 @@ public class AlunoController {
 
         JOptionPane.showMessageDialog(null, mensagem);
     }
-
 }

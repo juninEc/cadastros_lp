@@ -7,10 +7,11 @@ import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
@@ -34,7 +35,8 @@ public class PanelCadastroAluno extends JPanel {
 
     public PanelCadastroAluno() {
         super();
-        this.setLayout(null); 
+        this.setLayout(null);
+        setBackground(Color.decode("#B74B4B"));
 
         add(getLabelTitulo());
         add(getLabelNome());
@@ -50,7 +52,7 @@ public class PanelCadastroAluno extends JPanel {
         add(getLabelSexo());
         add(getSexo());
         add(getBotaoCadastrar());
-       
+
     }
 
     public JLabel getLabelTitulo() {
@@ -198,7 +200,6 @@ public class PanelCadastroAluno extends JPanel {
         }
 
         botaoCadastrar.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 AlunoController controller = new AlunoController();
@@ -210,15 +211,26 @@ public class PanelCadastroAluno extends JPanel {
                 String telefoneStr = telefone.getText();
                 String sexoStr = (String) sexo.getSelectedItem();
 
-                controller.cadastrarAluno(nomeStr, emailStr, cpfStr, matricula, telefoneStr, sexoStr);
+                if (nomeStr.isEmpty() || emailStr.isEmpty() || cpfStr.isEmpty() || matricula.isEmpty()
+                        || telefoneStr.isEmpty() || sexoStr.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+                } else {
+                    controller.cadastrarAluno(nomeStr, emailStr, cpfStr, matricula, telefoneStr, sexoStr);
+                    
+                    getNome().setText("");
+                    getEmail().setText("");
+                    getCpf().setText("");
+                    getNum_matricula().setText("");
+                    getTelefone().setText("");
+                    getSexo().setSelectedIndex(0);
 
-                getNome().setText("");
-                getEmail().setText("");
-                getCpf().setText("");
-                getNum_matricula().setText("");
-                getTelefone().setText("");
-                getSexo().setSelectedIndex(0);
+                    FrameTela frame = (FrameTela) SwingUtilities.getWindowAncestor(PanelCadastroAluno.this);
+                    frame.getContentPane().remove(PanelCadastroAluno.this);
 
+                    PanelMenu pMenu = new PanelMenu();
+                    frame.setContentPane(pMenu);
+                    frame.revalidate();
+                }
             }
         });
 
