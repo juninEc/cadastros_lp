@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import frame.FrameTela;
 import frame.PanelCadastroAluno;
+import frame.PanelCadastroDisciplina;
 import frame.PanelCadastroProfessor;
 import frame.PanelMenu;
 
@@ -13,6 +14,7 @@ public class FrameController {
     // atributos
     private static PanelCadastroAluno pCadAluno;
     private static PanelCadastroProfessor pCadProfessor;
+    private static PanelCadastroDisciplina pCadDisciplina;
     private static PanelMenu pMenu;
     private static FrameTela frame;
     
@@ -34,6 +36,7 @@ public class FrameController {
         pMenu = new PanelMenu();
         pCadAluno = new PanelCadastroAluno();
         pCadProfessor = new PanelCadastroProfessor(); 
+        pCadDisciplina = new PanelCadastroDisciplina(); 
     }
 
     public void mudarParaMenu(){
@@ -44,7 +47,7 @@ public class FrameController {
 
         frame.repaint();
         frame.validate();
-        //frame.pack();
+       
     }
     public void mudarParaCadAluno(){
         frame.getContentPane().removeAll();
@@ -54,7 +57,7 @@ public class FrameController {
 
         frame.repaint();
         frame.validate();
-        //frame.pack(); 
+        
     }
 
     public void mudarParaCadProfessor() {
@@ -65,6 +68,17 @@ public class FrameController {
 
         frame.repaint();
         frame.validate();
-        //frame.pack(); 
+       
+    }
+
+    public void mudarParaCadDisciplina() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(pCadDisciplina);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+
+        frame.repaint();
+        frame.validate();
+       
     }
 }
