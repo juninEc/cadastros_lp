@@ -8,81 +8,69 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import controller.FrameController;
+
 public class PanelMenu extends JPanel {
 
-    static PanelMenu pMenu;
-    static PanelCadastroAluno pAluno;
-    static FrameTela frame;
     private JLabel labelTitulo;
     private JButton buttonAluno;
     private JButton buttonProfessor;
     private JButton buttonDisciplina;
-    boolean fechou;
 
     public PanelMenu() {
         super();
         this.setLayout(null);
         setBackground(Color.decode("#B74B4B"));
 
-        pMenu = this;
-
-        add(getLabelTitulo());
-        add(getButtonAluno());
-        add(getButtonProfessor());
-        add(getButtonDisciplina());
-
-        ControladorFrame controlador = new ControladorFrame();
-        getButtonAluno().addActionListener(controlador);
-        getButtonProfessor().addActionListener(controlador);
-        getButtonDisciplina().addActionListener(controlador);
-
+        initLabelTitulo();
+        initButtonAluno();
+        initButtonProfessor();
+        initButtonDisciplina();
     }
 
-    public JLabel getLabelTitulo() {
-        if (labelTitulo == null) {
-            labelTitulo = new JLabel("Seja bem-vindo(a)!");
-            labelTitulo.setBounds(40, 25, 200, 20);
-            labelTitulo.setForeground(Color.WHITE);
-        }
-        return labelTitulo;
+    public void initLabelTitulo() {
+        labelTitulo = new JLabel("Seja bem-vindo(a)!");
+        labelTitulo.setBounds(40, 25, 200, 20);
+        labelTitulo.setForeground(Color.WHITE);
+        add(labelTitulo);
     }
 
-    public JButton getButtonAluno() {
-        if (buttonAluno == null) {
-            buttonAluno = new JButton("Cadastrar Aluno");
-            buttonAluno.setBounds(380, 100, 220, 40);
+    public void initButtonAluno() {
+        buttonAluno = new JButton("Cadastrar Aluno");
+        buttonAluno.setBounds(380, 100, 220, 40);
+        buttonAluno.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrameController.getInstance().mudarParaCadAluno();
+            }
+        });
 
-        }
-        return buttonAluno;
+        add(buttonAluno);
     }
 
-    public JButton getButtonProfessor() {
-        if (buttonProfessor == null) {
-            buttonProfessor = new JButton("Cadastrar Professor(a)");
-            buttonProfessor.setBounds(380, 200, 220, 40);
-        }
+    public void initButtonProfessor() {
+        buttonProfessor = new JButton("Cadastrar Professor(a)");
+        buttonProfessor.setBounds(380, 200, 220, 40);
+        buttonProfessor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrameController.getInstance().mudarParaCadProfessor();
+            }
+        });
 
-        return buttonProfessor;
+        add(buttonProfessor);
     }
 
-    public JButton getButtonDisciplina() {
-        if (buttonDisciplina == null) {
-            buttonDisciplina = new JButton("Cadastrar Disciplina");
-            buttonDisciplina.setBounds(380, 300, 220, 40);
-        }
-        return buttonDisciplina;
-    }
-
-    static class ControladorFrame implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == pMenu.getButtonAluno()) {
-                JOptionPane.showMessageDialog(null, "Cadastrar Disciplina");
-            } else if (e.getSource() == pMenu.getButtonProfessor()) {
-                JOptionPane.showMessageDialog(null, "Cadastrar Professor");
-            } else if (e.getSource() == pMenu.getButtonDisciplina()) {
+    public void initButtonDisciplina() {
+        buttonDisciplina = new JButton("Cadastrar Disciplina");
+        buttonDisciplina.setBounds(380, 300, 220, 40);
+        buttonDisciplina.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cadastrar Disciplina");
             }
-        }
+        });
+
+        add(buttonDisciplina);
     }
 }

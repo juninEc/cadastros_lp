@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,26 +14,32 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.text.MaskFormatter;
 
-import controller.AlunoController;
 import controller.FrameController;
+import controller.ProfessorController;
 
-public class PanelCadastroAluno extends JPanel {
+import javax.swing.JFormattedTextField;
+
+public class PanelCadastroProfessor extends JPanel {
     private JTextField nome;
     private JTextField email;
     private JTextField cpf;
     private JTextField num_matricula;
-    private JFormattedTextField telefone;
+    private JTextField telefone;
+    private JComboBox<String> grau;
     private JComboBox<String> sexo;
+
+    private JLabel labelTitulo;
     private JLabel labelNome;
+    private JLabel labelEmail;
     private JLabel labelCpf;
     private JLabel labelNum_Matricula;
     private JLabel labelTelefone;
+    private JLabel labelGrau;
     private JLabel labelSexo;
-    private JLabel labelEmail;
-    private JLabel labelTitulo;
+
     private JButton botaoCadastrar;
 
-    public PanelCadastroAluno() {
+    public PanelCadastroProfessor() {
         super();
         this.setLayout(null);
         setBackground(Color.decode("#B74B4B"));
@@ -49,6 +55,8 @@ public class PanelCadastroAluno extends JPanel {
         initNum_matricula();
         initLabelTelefone();
         initTelefone();
+        initLabelGrau();
+        initGrau();
         initLabelSexo();
         initSexo();
         initBotaoCadastrar();
@@ -138,8 +146,9 @@ public class PanelCadastroAluno extends JPanel {
 
     public void initTelefone() {
         try {
-            telefone = new JFormattedTextField(new MaskFormatter("## ##### - ####"));
+            telefone = new JFormattedTextField(new MaskFormatter("(##) ##### - ####"));
         } catch (ParseException e) {
+
             e.printStackTrace();
         }
         telefone.setBorder(new LineBorder(Color.WHITE));
@@ -148,47 +157,64 @@ public class PanelCadastroAluno extends JPanel {
         add(telefone);
     }
 
+    public void initLabelGrau() {
+        labelGrau = new JLabel("Grau Acadêmico: ");
+        labelGrau.setBounds(370, 275, 200, 20);
+        labelGrau.setForeground(Color.WHITE);
+        add(labelGrau);
+    }
+
+    public void initGrau() {
+        grau = new JComboBox<>(
+                new String[] { " ", "Licenciatura", "Bacharelado", "Especialização", "Mestrado", "Doutorado" });
+
+        grau.setBounds(370, 300, 250, 20);
+        add(grau);
+    }
+
     public void initLabelSexo() {
         labelSexo = new JLabel("Sexo: ");
-        labelSexo.setBounds(370, 275, 200, 20);
+        labelSexo.setBounds(370, 325, 200, 20);
         labelSexo.setForeground(Color.WHITE);
         add(labelSexo);
     }
 
     public void initSexo() {
         sexo = new JComboBox<>(new String[] { " ", "Masculino", "Feminino", "Outro" });
-        sexo.setBounds(370, 300, 250, 20);
+        sexo.setBounds(370, 350, 250, 20);
         add(sexo);
     }
 
     public void initBotaoCadastrar() {
-
         botaoCadastrar = new JButton("Cadastrar");
-        botaoCadastrar.setBounds(440, 360, 100, 40);
+        botaoCadastrar.setBounds(440, 390, 100, 40);
 
         botaoCadastrar.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                AlunoController controller = new AlunoController();
+                ProfessorController controller = new ProfessorController();
 
                 String nomeStr = nome.getText();
                 String emailStr = email.getText();
                 String cpfStr = cpf.getText();
                 String matricula = num_matricula.getText();
                 String telefoneStr = telefone.getText();
+                String grauStr = (String) grau.getSelectedItem();
                 String sexoStr = (String) sexo.getSelectedItem();
 
                 if (nomeStr.isEmpty() || emailStr.isEmpty() || cpfStr.isEmpty() || matricula.isEmpty()
-                        || telefoneStr.isEmpty() || sexoStr.isEmpty()) {
+                        || telefoneStr.isEmpty() || grauStr.isEmpty() || sexoStr.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
                 } else {
-                    controller.cadastrarAluno(nomeStr, emailStr, cpfStr, matricula, telefoneStr, sexoStr);
+                    controller.cadastrarProfessor(nomeStr, emailStr, cpfStr, matricula, telefoneStr, sexoStr, sexoStr);
 
                     nome.setText("");
                     email.setText("");
                     cpf.setText("");
                     num_matricula.setText("");
                     telefone.setText("");
+                    grau.setSelectedIndex(0);
                     sexo.setSelectedIndex(0);
 
                     FrameController.getInstance().mudarParaMenu();
