@@ -42,6 +42,7 @@ public class FrameController {
     public void mudarParaMenu(){
         frame.getContentPane().removeAll();
         frame.getContentPane().add(pMenu);
+        frame.setTitle("Sistema de Cadastro UESB");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
@@ -52,6 +53,7 @@ public class FrameController {
     public void mudarParaCadAluno(){
         frame.getContentPane().removeAll();
         frame.getContentPane().add(pCadAluno);
+        frame.setTitle("Cadastro do Aluno(a)");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
@@ -63,6 +65,7 @@ public class FrameController {
     public void mudarParaCadProfessor() {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(pCadProfessor);
+        frame.setTitle("Cadastro do Professor(a)");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 
@@ -74,6 +77,7 @@ public class FrameController {
     public void mudarParaCadDisciplina() {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(pCadDisciplina);
+        frame.setTitle("Cadastro da Disciplina");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 

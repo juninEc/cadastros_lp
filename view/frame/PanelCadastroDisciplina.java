@@ -1,6 +1,7 @@
 package frame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -25,12 +26,14 @@ public class PanelCadastroDisciplina extends JPanel {
     private JComboBox<String> departamento;
 
     private JLabel labelTitulo;
+    private JLabel labelInfo;
     private JLabel labelNome;
     private JLabel labelCargaHoraria;
     private JLabel labelNum_Matricula;
     private JLabel labelDepartamento;
 
     private JButton botaoCadastrar;
+    private JButton botaoVoltar;
 
     public PanelCadastroDisciplina() {
         super();
@@ -38,6 +41,7 @@ public class PanelCadastroDisciplina extends JPanel {
         setBackground(Color.decode("#B74B4B"));
 
         initLabelTitulo();
+        initLabelInfo();
         initLabelNome();
         initNome();
         initLabelCargaHoraria();
@@ -47,13 +51,23 @@ public class PanelCadastroDisciplina extends JPanel {
         initLabelDepartamento();
         initDepartamento();
         initBotaoCadastrar();
+        initBotaoVoltar();
     }
 
     public void initLabelTitulo() {
         labelTitulo = new JLabel("Seja bem-vindo(a)!");
         labelTitulo.setBounds(40, 25, 200, 20);
         labelTitulo.setForeground(Color.WHITE);
+        Font font = labelTitulo.getFont();
+        Font novaFonte = new Font(font.getName(), Font.BOLD, 18);
+        labelTitulo.setFont(novaFonte);
         add(labelTitulo);
+    }
+    public void initLabelInfo() {
+        labelInfo = new JLabel("<html>Área destinada para o cadastro de disciplinas da instituição!</html>");
+        labelInfo.setBounds(40, 35, 200, 100);
+        labelInfo.setForeground(Color.WHITE);
+        add(labelInfo);
     }
 
     public void initLabelNome() {
@@ -148,5 +162,19 @@ public class PanelCadastroDisciplina extends JPanel {
             }
         }); 
         add(botaoCadastrar);
+    }
+    public void initBotaoVoltar() {
+        botaoVoltar = new JButton("Voltar");
+        botaoVoltar.setBounds(20, 400, 80, 20);
+
+        botaoVoltar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrameController.getInstance().mudarParaMenu();
+            }
+        });
+
+        add(botaoVoltar);
     }
 }
